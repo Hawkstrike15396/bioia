@@ -7,4 +7,4 @@ fit_brm <- read_rds("fit_brm")
 
 df <- read_rds("df")
 
-
+correlation_coefficient <- read_rds("correlation_coefficient")
