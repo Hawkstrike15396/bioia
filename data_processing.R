@@ -8,6 +8,13 @@ df <-
        mutate(t2_rate = 100 * t2_adult / population, .keep = "unused") |>
        inner_join(obesity, join_by(country == country))
 
+df_raw <-
+       inner_join(t1_all, t1_children, join_by(country == country)) |>
+       inner_join(diabetes, join_by(country == country)) |>
+       drop_na() |>
+       inner_join(adult, join_by(country == country)) |>
+       inner_join(obesity, join_by(country == country))
+
 correlation_coefficient <- cor.test(
        df$obesity_rate,
        df$t2_rate,
