@@ -6,10 +6,10 @@ plot <-
   geom_point() +
   geom_smooth(method = "lm", se = FALSE, colour = "#000000") +
   labs(
-    title = "Figure 1: Association between obesity prevalence (%) and \n estimated type 2 diabetes rate (%) in 181 countries", 
+    title = NULL, 
     subtitle = "", 
-    x = "Obesity prevalence (%)", 
-    y = "Estimated type 2 diabetes rate (%)"
+    x = "Obesity prevalence in adults (%)", 
+    y = "Type 2 diabetes prevalence in adults (%)"
   ) +
   theme_minimal(base_family = "serif") +
   scale_x_continuous(
