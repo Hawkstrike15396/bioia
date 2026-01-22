@@ -8,8 +8,8 @@ plot <-
   labs(
     title = NULL, 
     subtitle = "", 
-    x = "Obesity prevalence in adults (%)", 
-    y = "Type 2 diabetes prevalence in adults (%)"
+    x = "Obesity prevalence (%)", 
+    y = "Type 2 diabetes prevalence (%)"
   ) +
   theme_minimal(base_family = "serif") +
   scale_x_continuous(
