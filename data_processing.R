@@ -16,7 +16,7 @@ df_raw <-
        inner_join(obesity, join_by(country == country))
 
 correlation_coefficient <- cor.test(
-       df$obesity_rate,
-       df$t2_rate,
+       df_cleaned$obesity_rate,
+       df_cleaned$t2_rate,
        method = "pearson"
 )

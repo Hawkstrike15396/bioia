@@ -1,6 +1,6 @@
 plot <- 
   ggplot(
-  data = df,
+  data = df_cleaned,
   mapping = aes(x = obesity_rate, y = t2_rate)
 ) +
   geom_point() +
@@ -13,13 +13,13 @@ plot <-
   ) +
   theme_minimal(base_family = "serif") +
   scale_x_continuous(
-    limits = c(0, 80),
-    breaks = seq(0, 80, by = 10),
+    limits = c(0, 50),
+    breaks = seq(0, 50, by = 10),
     expand = c(0, 0)
   ) +
     scale_y_continuous(
-    limits = c(0, 30),
-    breaks = seq(0, 30, by = 5),
+    limits = c(0, 25),
+    breaks = seq(0, 25, by = 5),
     expand = c(0, 0)
   ) +
   theme(

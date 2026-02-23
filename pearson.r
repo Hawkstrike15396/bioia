@@ -1,17 +1,30 @@
-pearson_save_me <- df  |> 
+pearson_intermediates <- df_cleaned %>%
     mutate(
-        mean_obesity = mean(df$obesity_rate), 
-        mean_t2_rate = mean(df$t2_rate), 
-        sd_obesity = obesity_rate - mean_obesity, 
-        sd_t2_rate = t2_rate - mean_t2_rate, 
-        multiply_thing = sd_obesity * sd_t2_rate
-    ) 
+        # Your original code: deviations from the mean
+        mean_obesity = mean(obesity_rate, na.rm = TRUE),
+        mean_t2_rate = mean(t2_rate, na.rm = TRUE),
+        sd_obesity = obesity_rate - mean_obesity,
+        sd_t2_rate = t2_rate - mean_t2_rate,
+        
+        # New intermediates: squared deviations and cross-products
+        sq_sd_obesity = sd_obesity^2,           # (x - mean_x)^2
+        sq_sd_t2_rate = sd_t2_rate^2,           # (y - mean_y)^2
+        multiply_thing = sd_obesity * sd_t2_rate # (x - mean_x)(y - mean_y)
+    )
 
-sum(pearson_save_me$multiply_thing) / ((sum(pearson_save_me$sd_t2_rate) ^2 * sum(pearson_save_me$sd_obesity) ^2)^0.5)
-
+# 2. Sum the intermediates to find Pearson's r
+pearson_results <- pearson_intermediates %>%
+    summarise(
+        sum_cross_product = sum(multiply_thing),
+        sum_sq_obesity = sum(sq_sd_obesity),
+        sum_sq_t2_rate = sum(sq_sd_t2_rate)
+    ) %>%
+    mutate(
+        r = sum_cross_product / sqrt(sum_sq_obesity * sum_sq_t2_rate)
+    )
 # Define parameters
-n <- 180              # Number of data points
-alpha <- 0.05         # Significance level (e.g., 0.05 for 95% confidence)
+n <- 174              # Number of data points
+alpha <- 0.01         # Significance level (e.g., 0.05 for 95% confidence)
 df <- n - 2           # Degrees of freedom
 
 # 1. Find the critical t-value (two-tailed test)
